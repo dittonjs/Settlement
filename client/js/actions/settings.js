@@ -15,6 +15,10 @@ export default {
         Api.get(Constants.REFRESH_JWT, `api/sessions/${defaultSettings.userId}`);
       }, refresh);
     }
+  },
+
+  login(data){
+    Dispatcher.dispatch({action: Constants.LOGIN, data});
   }
 
 };

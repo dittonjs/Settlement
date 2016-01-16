@@ -1,5 +1,5 @@
 {
-  "firebase": "amber-fire-8732",
+  "firebase": "settlement",
   "public": "build/prod",
   "ignore": [
     "firebase.json",

@@ -6,6 +6,9 @@ import StoreCommon    from "./store_common";
 import QueryString    from '../utils/query_string';
 
 var _settings = {};
+var _user = {
+  loggedIn: false
+}
 
 
 function loadSettings(defaultSettings){
@@ -23,6 +26,13 @@ function loadSettings(defaultSettings){
 
 }
 
+function login(data){
+  _user.uid = data.uid;
+  _user.token = data.token;
+  _user.info = data.password;
+  _user.loggedIn = true;
+}
+
 
 // Extend Message Store with EventEmitter to add eventing capabilities
 var SettingsStore = {...StoreCommon, ...{
@@ -30,9 +40,18 @@ var SettingsStore = {...StoreCommon, ...{
   // Return current messages
   current(){
     return _settings;
+  },
+  user(){
+    return _user;
+  },
+  authenticate(){
+    return _user.loggedIn;
   }
 
+
 }};
+
+
 
 // Register callback with Dispatcher
 Dispatcher.register(function(payload) {
@@ -41,6 +60,9 @@ Dispatcher.register(function(payload) {
 
     case Constants.SETTINGS_LOAD:
       loadSettings(payload.data);
+      break;
+    case Constants.LOGIN:
+      login(payload.data)
       break;
 
     default:
