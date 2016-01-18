@@ -11,7 +11,6 @@ export default class Index extends React.Component {
     }
     return (
       <div style={styles.mainApp}>
-        <h1>Settlements</h1>
         {this.props.children}
         <div className="footer">
           <p>

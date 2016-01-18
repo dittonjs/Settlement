@@ -1,38 +1,36 @@
 "use strict";
 
 import React from 'react';
-
-export default class Settlement extends React.Component{
+import BaseComponent from '../base_component';
+import SettlementsActions from "../../actions/settlements";
+import SettlementsStore   from '../../stores/settlements';
+export default class Settlement extends BaseComponent{
   constructor(props){
     super();
-    this.state = {};
-    this.state.position = null;
-    this.timeOut = -1;
+    this.stores = [SettlementsStore]
+    this.state = this.getState(props);
   }
 
-  startGeoLocation(){
-    navigator.geolocation.getCurrentPosition((position)=>{
-      this.setState({position});
-    });
-    this.timeOut = setTimeout(()=>{this.startGeoLocation()}, 5000);
-  }
-
-  componentWillUnmount(){
-    clearTimeout(this.timeOut)
-  }
-
-  componentDidMount(){
-    if(navigator.geolocation){
-      this.startGeoLocation();
+  getState(props){
+    return {
+      currentSettlement: SettlementsStore.currentSettlement()
     }
   }
+
   render(){
 
-    if(!this.state.position) return <div />
+    var content;
+    if(!this.state.currentSettlement || !this.state.currentSettlement.name){
+      content = <div>You are not at a settlement right now</div>
+    } else {
+      content = <div>
+                  <h2>{this.state.currentSettlement.name}</h2>
+                </div>
+    }
     console.log(this.state.position);
     return  <div>
               <h2>Settlement</h2>
-              <h2>Lat: {this.state.position.coords.latitude} Long: {this.state.position.coords.longitude}</h2>
+              {content}
             </div>
   }
 

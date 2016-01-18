@@ -10,5 +10,8 @@ export default {
   },
   loadSettlement(settlement){
     Dispatcher.dispatch({action: Constants.LOAD_SETTLEMENTS, settlement});
+  },
+  checkIfInSettlement(position){
+    Dispatcher.dispatch({action: Constants.CHECK_SETTLEMENT, position});
   }
 };

@@ -14,8 +14,12 @@ export default {
   
   //Settlements
   LOAD_SETTLEMENTS: "load_settlements",
-  UPDATE_SETTLEMENT: "load_settlements",
+  UPDATE_SETTLEMENT: "update_settlement",
+  CHECK_SETTLEMENT: "check_settlement",
 
   //User Data
-  LOAD_USER_DATA: "load_user_data"
+  LOAD_USER_DATA: "load_user_data",
+
+  //Navigation
+  TOGGLE_SIDE_BAR: "toggle_side_bar",
 };
